@@ -1,0 +1,60 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="HelloFrida.MainWindow"
+        Title="Hook That Mal" Height="580" Width="744">
+    <Window.Resources>
+        <DataTemplate x:Key="DeviceTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Icon}"
+                       Width="{Binding Icon.Width}"
+                       Height="{Binding Icon.Height}"/>
+                <TextBlock Text="{Binding Name}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="ProcessTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Icons[0]}"
+                       Width="{Binding Icons[0].Width}"
+                       Height="{Binding Icons[0].Height}"/>
+                <TextBlock Text="{Binding Name}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="513*"/>
+            <ColumnDefinition Width="227*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Height="69" HorizontalAlignment="Left" Margin="9,12,0,0" x:Name="deviceList" VerticalAlignment="Top" Width="355" ItemsSource="{Binding Devices}" ItemTemplate="{StaticResource DeviceTemplate}" SelectionChanged="deviceList_SelectionChanged" Grid.Column="1" />
+        <Button Content="Refresh" Height="23" HorizontalAlignment="Left" Margin="369,12,0,0" x:Name="refreshButton" VerticalAlignment="Top" Width="93" Click="refreshButton_Click" Grid.Column="1" />
+        <ListView HorizontalAlignment="Left" Margin="9,87,0,0" x:Name="processList" Width="355" ItemsSource="{Binding Processes}" ItemTemplate="{StaticResource ProcessTemplate}" Height="136" VerticalAlignment="Top" SelectionChanged="processList_SelectionChanged" Grid.Column="1" />
+        <ListBox Margin="478,0,10,10" x:Name="debugConsole" Height="110" VerticalAlignment="Bottom" Grid.Column="1" Grid.ColumnSpan="2" />
+        <Button Content="Spawn" Height="23" HorizontalAlignment="Left" Margin="369,87,0,0" x:Name="spawnButton" VerticalAlignment="Top" Width="93" Click="spawnButton_Click" Grid.Column="1" />
+        <Button Content="Resume" Height="23" HorizontalAlignment="Left" Margin="369,115,0,0" x:Name="resumeButton" VerticalAlignment="Top" Width="93" Click="resumeButton_Click" Grid.Column="1" />
+        <Button Content="Attach" Height="23" HorizontalAlignment="Left" Margin="369,143,0,0" x:Name="attachButton" VerticalAlignment="Top" Width="93" Click="attachButton_Click" Grid.Column="1" />
+        <Button Content="Load Script" Height="23" Margin="369,256,0,0" x:Name="loadScriptButton" VerticalAlignment="Top" Click="loadScriptButton_Click" HorizontalAlignment="Left" Width="93" Grid.Column="1" />
+        <TextBox Margin="9,229,0,128" x:Name="scriptSource" AcceptsReturn="True" AcceptsTab="True" Text="var a = Memory.allocUtf8String(&quot;Hei&quot;);&#xA;send({woot: 1227});&#xA;send({hello: 1337}, Memory.readByteArray(a, 4));&#xA;var onMessage = function onMessage(m) {&#xA;  send({reply: m});&#xA;  recv(onMessage);&#xA;};&#xA;recv(onMessage);&#xA;" HorizontalAlignment="Left" Width="355" Grid.Column="1" />
+        <Button Content="Unload Script" Height="23" HorizontalAlignment="Left" Margin="369,284,0,0" x:Name="unloadScriptButton" VerticalAlignment="Top" Width="93" Click="unloadScriptButton_Click" Grid.Column="1" />
+        <Button Content="Create Script" Height="23" HorizontalAlignment="Left" Margin="369,228,0,0" x:Name="createScriptButton" VerticalAlignment="Top" Width="93" Click="createScriptButton_Click" Grid.Column="1" />
+        <Button Content="Clear Results" Height="23" HorizontalAlignment="Left" Margin="369,312,0,0" x:Name="clearResultstButton" VerticalAlignment="Top" Width="93" Click="clearResultsButton_Click" Grid.Column="1" />
+        <Button Content="Detach" Height="23" HorizontalAlignment="Left" Margin="369,171,0,0" x:Name="detachButton" VerticalAlignment="Top" Width="93" Click="detachButton_Click" Grid.Column="1" />
+        <ListBox x:Name="scriptsListBox" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="10,0,0,10" Grid.Column="1" RenderTransformOrigin="0.5,0.5" SelectionMode="Multiple" HorizontalAlignment="Left" Width="452" Height="110" VerticalAlignment="Bottom">
+            <ListBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.000"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ListBox.RenderTransform>
+        </ListBox>
+        <Button Content="Edit Script" Height="23" HorizontalAlignment="Left" Margin="369,340,0,0" x:Name="editScriptButton" VerticalAlignment="Top" Width="93" Click="editScriptButton_Click" Grid.Column="1" />
+        <Button Content="Save Script" Height="23" HorizontalAlignment="Left" Margin="369,368,0,0" x:Name="saveScriptButton" VerticalAlignment="Top" Width="93" Click="saveScriptButton_Click" Grid.Column="1" />
+        <ListBox x:Name="resultBox" av:ItemsSource="{av:SampleData ItemCount=5}" Grid.ColumnSpan="2" Margin="478,10,10,128" Grid.Column="1"/>
+        <Button Content="Save Results" Height="23" HorizontalAlignment="Left" Margin="369,396,0,0" x:Name="saveResultsButton" VerticalAlignment="Top" Width="93" Click="saveResultstButton_Click" Grid.Column="1" />
+    </Grid>
+</Window>
