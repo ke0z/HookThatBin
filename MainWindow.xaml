@@ -40,7 +40,7 @@
         <TextBox Margin="9,229,0,128" x:Name="scriptSource" AcceptsReturn="True" AcceptsTab="True" Text="var a = Memory.allocUtf8String(&quot;Hei&quot;);&#xA;send({woot: 1227});&#xA;send({hello: 1337}, Memory.readByteArray(a, 4));&#xA;var onMessage = function onMessage(m) {&#xA;  send({reply: m});&#xA;  recv(onMessage);&#xA;};&#xA;recv(onMessage);&#xA;" HorizontalAlignment="Left" Width="355" Grid.Column="1" />
         <Button Content="Unload Script" Height="23" HorizontalAlignment="Left" Margin="369,284,0,0" x:Name="unloadScriptButton" VerticalAlignment="Top" Width="93" Click="unloadScriptButton_Click" Grid.Column="1" />
         <Button Content="Create Script" Height="23" HorizontalAlignment="Left" Margin="369,228,0,0" x:Name="createScriptButton" VerticalAlignment="Top" Width="93" Click="createScriptButton_Click" Grid.Column="1" />
-        <Button Content="Clear Results" Height="23" HorizontalAlignment="Left" Margin="369,312,0,0" x:Name="clearResultstButton" VerticalAlignment="Top" Width="93" Click="clearResultsButton_Click" Grid.Column="1" />
+        <Button Content="Clear Results" Height="23" HorizontalAlignment="Left" Margin="369,312,0,0" x:Name="clearResultstButton" VerticalAlignment="Top" Width="93" Click="postToScriptButton_Click" Grid.Column="1" />
         <Button Content="Detach" Height="23" HorizontalAlignment="Left" Margin="369,171,0,0" x:Name="detachButton" VerticalAlignment="Top" Width="93" Click="detachButton_Click" Grid.Column="1" />
         <ListBox x:Name="scriptsListBox" av:ItemsSource="{av:SampleData ItemCount=5}" Margin="10,0,0,10" Grid.Column="1" RenderTransformOrigin="0.5,0.5" SelectionMode="Multiple" HorizontalAlignment="Left" Width="452" Height="110" VerticalAlignment="Bottom">
             <ListBox.RenderTransform>

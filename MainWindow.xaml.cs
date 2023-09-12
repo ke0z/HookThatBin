@@ -51,7 +51,7 @@ namespace HelloFrida
             refreshButton.IsEnabled = session == null && deviceList.SelectedItem != null;
 
             processList.IsEnabled = session == null;
-            spawnButton.IsEnabled = processList.SelectedItem != null;
+            spawnButton.IsEnabled = deviceList.SelectedItem != null;
             resumeButton.IsEnabled = processList.SelectedItem != null;
             attachButton.IsEnabled = processList.SelectedItem != null && session == null;
             detachButton.IsEnabled = session != null;
@@ -156,6 +156,8 @@ namespace HelloFrida
 
         private void spawnButton_Click(object sender, RoutedEventArgs e)
         {
+            HookAMal.SpawnWindow spawnWindow = new HookAMal.SpawnWindow();
+            spawnWindow.Show();
             var device = deviceList.SelectedItem as Frida.Device;
             try
             {
