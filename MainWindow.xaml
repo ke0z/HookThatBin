@@ -29,7 +29,7 @@
             <ColumnDefinition Width="513*"/>
             <ColumnDefinition Width="227*"/>
         </Grid.ColumnDefinitions>
-        <ListView Height="69" HorizontalAlignment="Left" Margin="9,12,0,0" x:Name="deviceList" VerticalAlignment="Top" Width="355" ItemsSource="{Binding Devices}" ItemTemplate="{StaticResource DeviceTemplate}" SelectionChanged="deviceList_SelectionChanged" Grid.Column="1" />
+        <ListView Height="69" HorizontalAlignment="Left" Margin="9,12,0,0" x:Name="deviceList" VerticalAlignment="Top" Width="355" ItemsSource="{Binding Devices}" ItemTemplate="{StaticResource DeviceTemplate}" SelectionChanged="deviceList_SelectionChanged" Grid.Column="1" x:FieldModifier="public"  />
         <Button Content="Refresh" Height="23" HorizontalAlignment="Left" Margin="369,12,0,0" x:Name="refreshButton" VerticalAlignment="Top" Width="93" Click="refreshButton_Click" Grid.Column="1" />
         <ListView HorizontalAlignment="Left" Margin="9,87,0,0" x:Name="processList" Width="355" ItemsSource="{Binding Processes}" ItemTemplate="{StaticResource ProcessTemplate}" Height="136" VerticalAlignment="Top" SelectionChanged="processList_SelectionChanged" Grid.Column="1" />
         <ListBox Margin="478,0,10,10" x:Name="debugConsole" Height="110" VerticalAlignment="Bottom" Grid.Column="1" Grid.ColumnSpan="2" />

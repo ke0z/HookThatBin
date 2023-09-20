@@ -10,11 +10,9 @@
     <Grid>
         <Label Content="Program" HorizontalAlignment="Left" Margin="28,33,0,0" VerticalAlignment="Top"/>
         <Label Content="Args" HorizontalAlignment="Left" Margin="28,64,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Margin="89,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="270" Height="26"/>
-        <Grid>
-            <Button Content="+" HorizontalAlignment="Left" Margin="316,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="6.248,0.309" Click="Button_Click"/>
-            <Button Content="-" HorizontalAlignment="Left" Margin="345,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="6.248,0.309"/>
-        </Grid>
+        <TextBox x:Name="txtBoxProgram" HorizontalAlignment="Left" Margin="89,33,0,0" TextWrapping="Wrap" Text="C:\Windows\notepad.exe" VerticalAlignment="Top" Width="270" Height="26"/>
+        <TextBox x:Name="txtBoxArgs" HorizontalAlignment="Left" Margin="89,64,0,0" TextWrapping="Wrap" Text="C:\document.txt" VerticalAlignment="Top" Width="270" Height="26"/>
+        <Button x:Name="btnSpawnProg" Content="Spawn" HorizontalAlignment="Left" Margin="171,135,0,0" VerticalAlignment="Top" Click="btnSpawnProg_Click"/>
 
     </Grid>
 </Window>

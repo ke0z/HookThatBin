@@ -30,9 +30,10 @@ namespace HelloFrida
 
         public ObservableCollection<Device> Devices { get; private set; }
         public ObservableCollection<Process> Processes { get; private set; }
-        private Session session;
-        private Script script;
-        private bool scriptLoaded;
+        public Session session;
+        public Script script;
+        public bool scriptLoaded;
+        public uint pid;
 
        
 
@@ -52,7 +53,7 @@ namespace HelloFrida
 
             processList.IsEnabled = session == null;
             spawnButton.IsEnabled = deviceList.SelectedItem != null;
-            resumeButton.IsEnabled = processList.SelectedItem != null;
+            //resumeButton.IsEnabled = processList.SelectedItem != null;
             attachButton.IsEnabled = processList.SelectedItem != null && session == null;
             detachButton.IsEnabled = session != null;
 
@@ -158,15 +159,7 @@ namespace HelloFrida
         {
             HookAMal.SpawnWindow spawnWindow = new HookAMal.SpawnWindow();
             spawnWindow.Show();
-            var device = deviceList.SelectedItem as Frida.Device;
-            try
-            {
-               // device.Spawn("C:\\Windows\\notepad.exe", new string[] { "C:\\Windows\\notepad.exe", "C:\\document.txt" }, null, null, null);
-            }
-            catch (Exception ex)
-            {
-                debugConsole.Items.Add("Spawn failed: " + ex.Message);
-            }
+            
         }
 
         private void resumeButton_Click(object sender, RoutedEventArgs e)
@@ -174,7 +167,9 @@ namespace HelloFrida
             var device = deviceList.SelectedItem as Frida.Device;
             try
             {
-                device.Resume(1337);
+                
+                device.Resume(pid);
+
             }
             catch (Exception ex)
             {
@@ -209,7 +204,7 @@ namespace HelloFrida
             RefreshAllowedActions();
         }
 
-        private void session_Detached(object sender, Frida.SessionDetachedEventArgs e)
+        public void session_Detached(object sender, Frida.SessionDetachedEventArgs e)
         {
             if (sender == session)
             {
@@ -235,6 +230,7 @@ namespace HelloFrida
                 script = null;
                 scriptLoaded = false;
                 RefreshAllowedActions();
+                resumeButton.IsEnabled = true;
             }
 
             try
@@ -295,10 +291,6 @@ namespace HelloFrida
             }
         }
 
-        private void scriptSource_Copy_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
 
         private void editScriptButton_Click(object sender, RoutedEventArgs e)
         {
@@ -350,7 +342,9 @@ namespace HelloFrida
                 var current_dir = Directory.GetCurrentDirectory();
                 var results_path = current_dir + "\\results";
                 DateTime now = DateTime.Now;
+                
                 var str = processList.SelectedItem.ToString();
+                
                 var badChars = new string[] { "\"", ":" , ","};
                 foreach (var badChar in badChars )
                 {
