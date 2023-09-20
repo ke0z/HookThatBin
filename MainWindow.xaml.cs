@@ -53,7 +53,7 @@ namespace HelloFrida
 
             processList.IsEnabled = session == null;
             spawnButton.IsEnabled = deviceList.SelectedItem != null;
-            //resumeButton.IsEnabled = processList.SelectedItem != null;
+            resumeButton.IsEnabled = processList.SelectedItem != null || pid > 1;
             attachButton.IsEnabled = processList.SelectedItem != null && session == null;
             detachButton.IsEnabled = session != null;
 
@@ -286,8 +286,6 @@ namespace HelloFrida
             if (sender == script)
             {
                 resultBox.Items.Add(String.Format("{0}", e.Message));
-                //resultBox.Items.Add(String.Format("  Data: {0}", e.Data == null ? "null" : String.Join(", ", e.Data)));
-                
             }
         }
 
@@ -352,7 +350,7 @@ namespace HelloFrida
                     {
                         name = p.ProcessName;
                     }
-                    var dir_name = System.IO.Path.Combine(results_path, name.Replace(@"\", ""));
+                    var dir_name = System.IO.Path.Combine(results_path, name);
                     Directory.CreateDirectory(dir_name);
                     var result_filename = System.IO.Path.Combine(dir_name, now.ToLongTimeString().Replace(':', '-'));
                     StreamWriter SaveFile = new StreamWriter(result_filename);

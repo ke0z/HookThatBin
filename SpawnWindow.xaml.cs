@@ -23,10 +23,6 @@ namespace HookAMal
     public partial class SpawnWindow : System.Windows.Window
     {
 
-        public class spawnedItems
-        {
-            public string ProcName { get; set; }
-        }
 
         public SpawnWindow()
         {
@@ -53,8 +49,8 @@ namespace HookAMal
                         winWin.createScriptButton.IsEnabled = winWin.session != null && winWin.script == null;
                         winWin.loadScriptButton.IsEnabled = winWin.script != null && !winWin.scriptLoaded;
                         winWin.unloadScriptButton.IsEnabled = winWin.script != null;
+                        winWin.resumeButton.IsEnabled = winWin.pid >= 1;
                         winWin.Processes.Clear();
-                        winWin.processList.ClearValue(ItemsControl.ItemsSourceProperty);
                     }
                     catch (Exception ex)
                     {
