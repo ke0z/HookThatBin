@@ -342,25 +342,48 @@ namespace HelloFrida
                 var current_dir = Directory.GetCurrentDirectory();
                 var results_path = current_dir + "\\results";
                 DateTime now = DateTime.Now;
-                
-                var str = processList.SelectedItem.ToString();
-                
-                var badChars = new string[] { "\"", ":" , ","};
-                foreach (var badChar in badChars )
-                {
-                    str = str.Replace(badChar, string.Empty);
-                }
-                var dir_name = System.IO.Path.Combine(results_path, str.Replace(@"\", ""));
-                
-                Directory.CreateDirectory(dir_name);
-                var result_filename = System.IO.Path.Combine(dir_name, now.ToLongTimeString().Replace(':', '-'));
-                StreamWriter SaveFile = new StreamWriter(result_filename);
-                foreach (var item in resultBox.Items)
-                {
-                    SaveFile.WriteLine(item);
-                }
 
-                SaveFile.Close();
+
+                string str = null;
+                if (str == null)
+                {
+                    string name;
+                    using (var p = System.Diagnostics.Process.GetProcessById(Convert.ToInt32(pid)))
+                    {
+                        name = p.ProcessName;
+                    }
+                    var dir_name = System.IO.Path.Combine(results_path, name.Replace(@"\", ""));
+                    Directory.CreateDirectory(dir_name);
+                    var result_filename = System.IO.Path.Combine(dir_name, now.ToLongTimeString().Replace(':', '-'));
+                    StreamWriter SaveFile = new StreamWriter(result_filename);
+                    foreach (var item in resultBox.Items)
+                    {
+                        SaveFile.WriteLine(item);
+                    }
+
+                    SaveFile.Close();
+                }
+                else
+                {
+                    str = processList.SelectedItem.ToString();
+                    var badChars = new string[] { "\"", ":", "," };
+                    foreach (var badChar in badChars)
+                    {
+                        str = str.Replace(badChar, string.Empty);
+                    }
+                    var dir_name = System.IO.Path.Combine(results_path, str.Replace(@"\", ""));
+
+                    Directory.CreateDirectory(dir_name);
+                    var result_filename = System.IO.Path.Combine(dir_name, now.ToLongTimeString().Replace(':', '-'));
+                    StreamWriter SaveFile = new StreamWriter(result_filename);
+                    foreach (var item in resultBox.Items)
+                    {
+                        SaveFile.WriteLine(item);
+                    }
+
+                    SaveFile.Close();
+                }
+                
 
                 System.Windows.MessageBox.Show("Saved Results");
             }
