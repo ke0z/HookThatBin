@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:HookAMal"
         mc:Ignorable="d"
         ResizeMode="CanMinimize"
-        Title="SpawnWindow" Height="170" Width="400">
+        Title="SpawnWindow" Height="200" Width="400">
     <Grid>
         <Label Content="Program" HorizontalAlignment="Left" Margin="28,33,0,0" VerticalAlignment="Top"/>
         <Label Content="Args" HorizontalAlignment="Left" Margin="28,64,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtBoxProgram" HorizontalAlignment="Left" Margin="89,33,0,0" TextWrapping="Wrap" Text="C:\Windows\notepad.exe" VerticalAlignment="Top" Width="270" Height="26"/>
         <TextBox x:Name="txtBoxArgs" HorizontalAlignment="Left" Margin="89,64,0,0" TextWrapping="Wrap" Text="C:\document.txt" VerticalAlignment="Top" Width="270" Height="26"/>
-        <Button x:Name="btnSpawnProg" Content="Spawn" HorizontalAlignment="Center" Margin="0,99,0,0" VerticalAlignment="Top" Click="btnSpawnProg_Click"/>
+        <Button x:Name="btnSpawnProg" Content="Spawn" HorizontalAlignment="Center" Margin="0,110,0,0" VerticalAlignment="Top" Click="btnSpawnProg_Click"/>
 
     </Grid>
 </Window>

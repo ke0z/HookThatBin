@@ -18,6 +18,7 @@ using System.IO;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace HelloFrida
 {
@@ -34,6 +35,7 @@ namespace HelloFrida
         public Script script;
         public bool scriptLoaded;
         public uint pid;
+        private string name;
 
        
 
@@ -335,34 +337,17 @@ namespace HelloFrida
 
         private void saveResultstButton_Click(object sender, RoutedEventArgs e)
         {
-            if (resultBox.Items.Count != 0)
+
+            var current_dir = Directory.GetCurrentDirectory();
+            var results_path = current_dir + "\\results";
+
+            DateTime now = DateTime.Now;
+
+            if (spawnButton.IsEnabled == false)
             {
-                var current_dir = Directory.GetCurrentDirectory();
-                var results_path = current_dir + "\\results";
-                DateTime now = DateTime.Now;
-
-
-                string str = null;
-                if (str == null)
-                {
-                    string name;
-                    using (var p = System.Diagnostics.Process.GetProcessById(Convert.ToInt32(pid)))
-                    {
-                        name = p.ProcessName;
-                    }
-                    var dir_name = System.IO.Path.Combine(results_path, name);
-                    Directory.CreateDirectory(dir_name);
-                    var result_filename = System.IO.Path.Combine(dir_name, now.ToLongTimeString().Replace(':', '-'));
-                    StreamWriter SaveFile = new StreamWriter(result_filename);
-                    foreach (var item in resultBox.Items)
-                    {
-                        SaveFile.WriteLine(item);
-                    }
-
-                    SaveFile.Close();
-                }
-                else
-                {
+                
+                string str;
+                
                     str = processList.SelectedItem.ToString();
                     var badChars = new string[] { "\"", ":", "," };
                     foreach (var badChar in badChars)
@@ -380,10 +365,35 @@ namespace HelloFrida
                     }
 
                     SaveFile.Close();
-                }
+                
                 
 
                 System.Windows.MessageBox.Show("Saved Results");
+            }
+
+            else 
+            {
+                try
+                {
+                    name = "random_program";
+
+                    
+
+                        var dir_name = System.IO.Path.Combine(results_path, name, pid.ToString());
+                        Directory.CreateDirectory(dir_name);
+                        var result_filename = System.IO.Path.Combine(dir_name, now.ToLongTimeString().Replace(':', '-'));
+                        StreamWriter SaveFile = new StreamWriter(result_filename);
+                        foreach (var item in resultBox.Items)
+                        {
+                            SaveFile.WriteLine(item);
+                        }
+
+                        SaveFile.Close();
+                    System.Windows.MessageBox.Show("Saved Results");
+
+                }
+                catch { }
+
             }
         }
 
