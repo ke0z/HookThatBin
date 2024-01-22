@@ -1,24 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Collections.ObjectModel;
 using Frida;
 using System.IO;
-using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Xml.Linq;
 
 namespace HelloFrida
 {
@@ -79,12 +65,40 @@ namespace HelloFrida
         {
             var current_dir = Directory.GetCurrentDirectory();
             var scripts = current_dir + "\\scripts";
-            int i;
-            String[] files = Directory.GetFiles(scripts);
-            for (i = 0; i < files.Length; i++)
+
+            bool exists = Directory.Exists(scripts);
+
+            try
             {
-                scriptsListBox.Items.Add(files[i]);
+
+                if (!exists)
+                {
+
+                    Directory.CreateDirectory(scripts);
+                    MessageBox.Show("Created " + scripts + " Directory");
+
+                }
+
+                else
+                {
+                    MessageBox.Show("Reading scripts from " + scripts);
+                }
+
+                int i;
+                String[] files = Directory.GetFiles(scripts);
+                for (i = 0; i < files.Length; i++)
+                {
+                    scriptsListBox.Items.Add(files[i]);
+                }
             }
+
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            
+            }
+
+            
         }
         private void RefreshDeviceList()
         {
