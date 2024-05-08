@@ -14,3 +14,7 @@ Using VisualStudio, .NET4.8, Frida (frida-clr-16.1.10-windows-x86.dll.xz) or (fr
 
 # Running
 Extract and Execute HookThatBin
+
+# DEMO
+
+![](https://github.com/ke0z/HookThatBin/blob/master/HookABin.gif)
